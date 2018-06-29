@@ -1,0 +1,33 @@
+<aura:component controller="SMKAppointmentsListController"   implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,forceCommunity:availableForAllPageTypes">
+        <aura:attribute name="appointments" type="List" />
+        <aura:attribute name="recordId" type="Id" />
+
+        <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+          
+        <!-- Use a data table from the Lightning Design System: https://www.lightningdesignsystem.com/components/data-tables/ -->
+        <table class="slds-table slds-table_bordered slds-table_striped slds-table_cell-buffer slds-table_fixed-layout">
+          <thead>
+            <tr class="slds-text-heading_label">
+              <th scope="col"><div class="slds-truncate" title="Status">Status</div></th>
+              <th scope="col"><div class="slds-truncate" title="No Show">No Show</div></th>
+              <th scope="col"><div class="slds-truncate" title="Entered On">Entered On</div></th>
+              <th scope="col"><div class="slds-truncate" title="From Time">From Time</div></th>
+              <th scope="col"><div class="slds-truncate" title="Care Provider">Care Provider</div></th>
+              <th scope="col"><div class="slds-truncate" title="Entered At">Entered At</div></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Use the Apex model and controller to fetch server side data -->
+            <aura:iteration items="{!v.appointments}" var="appointment">
+                <tr>
+                    <td scope="row"><div class="slds-truncate" title="{!appointment.Status}">{!appointment.Status}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!appointment.NoShow}">{!appointment.NoShow}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!appointment.EnteredOn}">{!appointment.EnteredOn}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!appointment.FromTime}">{!appointment.FromTime}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!appointment.CareProvider.Description}">{!appointment.CareProvider.Description}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!appointment.EnteredAt.Description}">{!appointment.EnteredAt.Description}</div></td>
+                   </tr>
+            </aura:iteration>
+          </tbody>
+        </table>
+      </aura:component>

@@ -1,0 +1,7 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="SMKAppointmentsListController">
+	<aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="result" type="String" default="not executed yet"/>
+       
+	<button class="slds-button slds-button_brand" press="{!c.retrieveAppointments}">Ophalen afspraken</button>
+    Result: {!v.result}
+</aura:component>

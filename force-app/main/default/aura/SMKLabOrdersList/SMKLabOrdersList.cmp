@@ -1,0 +1,39 @@
+<aura:component controller="SMKLabOrdersListController"   implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+        <aura:attribute name="laborders" type="List" />
+        <aura:attribute name="recordId" type="Id" />
+    	<aura:attribute name="ObjectType" type="String"/>
+
+        <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+          
+          
+        <!-- Use a data table from the Lightning Design System: https://www.lightningdesignsystem.com/components/data-tables/ -->
+        <table class="slds-table slds-table_bordered slds-table_striped slds-table_cell-buffer slds-table_fixed-layout">
+          <thead>
+            <tr class="slds-text-heading_label">
+              <th scope="col"><div class="slds-truncate" title="Status">Status</div></th>
+              <th scope="col"><div class="slds-truncate" title="Placer Id">Placer Id</div></th>
+              <th scope="col"><div class="slds-truncate" title="Filler Id">Filler Id</div></th>
+              <th scope="col"><div class="slds-truncate" title="Order Item">Order Item</div></th>
+              <th scope="col"><div class="slds-truncate" title="Specimen Collection Time">Specimen Collection Time</div></th>
+              <th scope="col"><div class="slds-truncate" title="Priority">Priority</div></th>
+              <th scope="col"><div class="slds-truncate" title="Result Type">Result Type</div></th>
+              <th scope="col"><div class="slds-truncate" title="Result Status">Result Status</div></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Use the Apex model and controller to fetch server side data -->
+            <aura:iteration items="{!v.laborders}" var="laborder">
+                <tr>
+                    <td scope="row"><div class="slds-truncate" title="{!laborder.Status}">{!laborder.Status}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!laborder.PlacerId}">{!laborder.PlacerId}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!laborder.FillerId}">{!laborder.FillerId}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!laborder.OrderItem.Description}">{!laborder.OrderItem.Description}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!laborder.SpecimenCollectedTime}">{!laborder.SpecimenCollectedTime}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!laborder.Priority.Description}">{!laborder.Priority.Description}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!laborder.Result.ResultType}">{!laborder.Result.ResultStatus}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!laborder.Result.ResultStatus}">{!laborder.Result.ResultStatus}</div></td>
+                   </tr>
+            </aura:iteration>
+          </tbody>
+        </table>
+      </aura:component>

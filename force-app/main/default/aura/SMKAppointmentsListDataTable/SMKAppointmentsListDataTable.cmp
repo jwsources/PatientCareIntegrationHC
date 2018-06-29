@@ -1,0 +1,87 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global" controller="SMKAppointmentsDataTableController">
+    <aura:attribute name="recordId" type="Id" />
+    <!-- <aura:attribute name="appointments" type="List" /> -->
+    <aura:attribute name="data" type="Object"/>
+    
+    <!-- datatable attributes -->
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="selectedRowsCount" type="Integer" default="0"/>
+    <aura:attribute name="selectedRowsDetails" type="Object"/>
+    <aura:attribute name="selectedRowsList" type="List"/>
+    <aura:attribute name="maxRowSelection" type="Integer" default="5"/>
+    <aura:attribute name="selectedRows" type="List"/>
+
+    <!-- enable infiniteloading -->
+    
+	<aura:attribute name="enableInfiniteLoading" type="Boolean" default="true"/>
+    <aura:attribute name="initialRows" type="Integer" default="30"/>
+    <aura:attribute name="rowsToLoad" type="Integer" default="10"/>
+    <aura:attribute name="totalNumberOfRows" type="Integer" default="10"/>
+    <aura:attribute name="loadMoreStatus" type="String" default="Loading .... "/>
+    <aura:attribute name="showRowNumberColumn" type="Boolean" default="false"/>
+    <aura:attribute name="rowNumberOffset" type="Integer" default="0"/>
+    <aura:attribute name="rowsToAdd" type="Integer" default="10"/>
+    <aura:attribute name="currentCount" type="Integer" default="10"/>
+    
+    <aura:attribute name="activeFilter" type="string" default="All" description="The currently selected actions filter"/>
+    
+    <aura:attribute name="sortedBy" type="String"/>
+    <aura:attribute name="sortedDirection" type="String"/>
+    <aura:attribute name="defaultSortDirection" type="String"/>
+    
+    <!-- handlers-->    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+  
+    <!-- the container element determine the height of the datatable -->
+    <div style="height: 600px">
+        <lightning:datatable columns="{! v.columns }"
+                             data="{! v.data }"
+                             keyField="id"
+                             showRowNumberColumn="true"
+                             rowNumberOffset="0"
+                             onrowaction="{! c.handleRowAction }"
+                             selectedRows="{! v.selectedRows }"
+                             maxRowSelection="{! v.maxRowSelection }"
+                             onrowselection="{! c.updateSelectedText }"
+                             enableInfiniteLoading="true"
+                             loadMoreOffset="{! v.loadMoreOffset }"
+                             onheaderaction="{! c.handleHeaderAction }"
+                             sortedBy="{! v.sortedBy }"
+                             sortedDirection="{! v.sortedDirection }"
+                             defaultSortDirection="{! v.defaultSortDirection }"
+                             onsort="{! c.updateColumnSorting }"
+                             onloadmore="{! c.loadMoreData }"/>
+    </div>
+    {! v.loadMoreStatus }
+    
+    
+    
+    
+    <!-- Use a data table from the Lightning Design System: https://www.lightningdesignsystem.com/components/data-tables/ 
+    <table class="slds-table slds-table_bordered slds-table_striped slds-table_cell-buffer slds-table_fixed-layout">
+        <thead>
+            <tr class="slds-text-heading_label">
+                <th scope="col"><div class="slds-truncate" title="Status">Status</div></th>
+                <th scope="col"><div class="slds-truncate" title="No Show">No Show</div></th>
+                <th scope="col"><div class="slds-truncate" title="Entered On">Entered On</div></th>
+                <th scope="col"><div class="slds-truncate" title="From Time">From Time</div></th>
+                <th scope="col"><div class="slds-truncate" title="Care Provider">Care Provider</div></th>
+                <th scope="col"><div class="slds-truncate" title="Entered At">Entered At</div></th>
+            </tr>
+        </thead>
+        <tbody>
+            - Use the Apex model and controller to fetch server side data 
+            <aura:iteration items="{!v.appointments}" var="appointment">
+                <tr>
+                    <td scope="row"><div class="slds-truncate" title="{!appointment.Status}">{!appointment.Status}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!appointment.NoShow}">{!appointment.NoShow}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!appointment.EnteredOn}">{!appointment.EnteredOn}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!appointment.FromTime}">{!appointment.FromTime}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!appointment.CareProvider.Description}">{!appointment.CareProvider.Description}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!appointment.EnteredAt.Description}">{!appointment.EnteredAt.Description}</div></td>
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table> -->
+</aura:component>

@@ -1,0 +1,21 @@
+<aura:component implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" controller="SMKCreateDossierFile" access="global" >
+   <aura:attribute name="response" type="Map"/>
+   <aura:attribute name="show" type="Boolean"/>
+   <aura:attribute name="MPIID" type="String"/>
+
+   <div class="slds-m-around_medium">
+   		<div class="slds-media__body">
+            <div class="slds-align_absolute-center slds-text-body_regular">Verzoek tot toezenden Dossier</div>
+            <br />
+        </div>
+          
+       <div class="row slds-align_absolute-center">         
+              <button class="slds-button slds-button_brand" onclick="{!c.RequestFile}">Vraag Dossier Op</button>  
+       </div>
+       <br />
+    	<aura:if isTrue="{!v.show}">
+             <div class="slds-text-color_default">Uw dossier aanvraag met nummer {!v.response.filename} is succesvol verzonden en wordt zo spoedig mogelijk verwerkt.</div>
+          </aura:if>
+   </div>
+
+</aura:component>

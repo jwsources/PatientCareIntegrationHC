@@ -1,0 +1,36 @@
+<aura:component controller="SMKMedicationsListController"   implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+        <aura:attribute name="medications" type="List" />
+        <aura:attribute name="recordId" type="Id" />
+
+        <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+          
+          
+        <!-- Use a data table from the Lightning Design System: https://www.lightningdesignsystem.com/components/data-tables/ -->
+        <table class="slds-table slds-table_bordered slds-table_striped slds-table_cell-buffer slds-table_fixed-layout">
+          <thead>
+            <tr class="slds-text-heading_label">
+              <th scope="col"><div class="slds-truncate" title="Order Item Description">Order Item</div></th>
+              <th scope="col"><div class="slds-truncate" title="Status">Status</div></th>
+              <th scope="col"><div class="slds-truncate" title="Ordered By Description">Ordered By</div></th>
+              <th scope="col"><div class="slds-truncate" title="Priority">Priority</div></th>
+              <th scope="col"><div class="slds-truncate" title="Entered On">Entered On</div></th>
+              <th scope="col"><div class="slds-truncate" title="From Time">From Time</div></th>
+              <th scope="col"><div class="slds-truncate" title="Drug Product">Drug Product</div></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Use the Apex model and controller to fetch server side data -->
+            <aura:iteration items="{!v.medications}" var="medication">
+                <tr>
+                    <td scope="row"><div class="slds-truncate" title="{!medication.OrderItem.Description}">{!medication.OrderItem.Description}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!medication.Status}">{!medication.Status}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!medication.OrderedBy.Description}">{!medication.OrderedBy.Description}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!medication.Priority.Description}">{!medication.Priority.Description}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!medication.EnteredOn}">{!medication.EnteredOn}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!medication.FromTime}">{!medication.FromTime}</div></td>
+                    <td scope="row"><div class="slds-truncate" title="{!medication.DrugProduct.Description}">{!medication.DrugProduct.Description}</div></td>
+                   </tr>
+            </aura:iteration>
+          </tbody>
+        </table>
+      </aura:component>
